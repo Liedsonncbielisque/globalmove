@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Users, ArrowRight } from 'lucide-react';
+import { MapPin, Users, ArrowRight, Globe } from 'lucide-react';
 import axios from 'axios';
+import { FALLBACK_COUNTRIES } from '@/lib/fallback-data';
 
 interface Country {
   id: string;
@@ -16,16 +17,18 @@ interface Country {
 export default function Countries() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [usingFallback, setUsingFallback] = useState(false);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
     async function fetchCountries() {
       try {
-        const { data } = await axios.get('/api/countries');
+        const { data } = await axios.get('/api/countries', { timeout: 5000 });
         setCountries(data.data.countries || []);
       } catch (err) {
-        setError('Não foi possível carregar os destinos. Tente novamente.');
+        // API indisponível — usar dados locais
+        setCountries(FALLBACK_COUNTRIES);
+        setUsingFallback(true);
       } finally {
         setLoading(false);
       }
@@ -56,24 +59,6 @@ export default function Countries() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="min-h-screen pt-24 pb-12">
-        <div className="container mx-auto px-4 max-w-2xl text-center">
-          <div className="glass p-12 rounded-xl">
-            <p className="text-error text-lg mb-4">⚠️ {error}</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-6 py-2 bg-accent text-background rounded-md font-medium"
-            >
-              Tentar novamente
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen pt-24 pb-12">
       <div className="container mx-auto px-4">
@@ -91,6 +76,15 @@ export default function Countries() {
           />
         </div>
 
+        {usingFallback && (
+          <div className="glass p-4 rounded-lg mb-6 flex items-center gap-3 text-sm">
+            <Globe className="h-5 w-5 text-warning flex-shrink-0" />
+            <p className="text-gray-400">
+              Exibindo dados de demonstração. Conecte o backend para dados em tempo real.
+            </p>
+          </div>
+        )}
+
         {filtered.length === 0 ? (
           <div className="glass p-12 rounded-xl text-center">
             <p className="text-gray-400">Nenhum país encontrado para "{filter}"</p>
@@ -101,7 +95,7 @@ export default function Countries() {
               <Link
                 key={country.id}
                 to={`/destinos/${country.iso_code.toLowerCase()}`}
-                className="glass p-6 rounded-lg hover:border-accent/50 transition-all group"
+                className="glass p-6 rounded-lg hover:border-accent/50 transition-all group hover:-translate-y-1"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <span className="text-4xl">{country.flag}</span>

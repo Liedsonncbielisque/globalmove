@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FALLBACK_COUNTRIES } from '@/lib/fallback-data';
 
 export default function Compare() {
   const [countries, setCountries] = useState<any[]>([]);
@@ -9,10 +10,10 @@ export default function Compare() {
   useEffect(() => {
     async function fetchCountries() {
       try {
-        const { data } = await axios.get('/api/countries');
+        const { data } = await axios.get('/api/countries', { timeout: 5000 });
         setCountries(data.data.countries || []);
       } catch (err) {
-        console.error(err);
+        setCountries(FALLBACK_COUNTRIES);
       } finally {
         setLoading(false);
       }
@@ -50,7 +51,6 @@ export default function Compare() {
         <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Comparar Destinos</h1>
         <p className="text-gray-400 mb-8">Selecione até 4 países para comparar lado a lado.</p>
 
-        {/* Selector */}
         <div className="glass p-6 rounded-lg mb-8">
           <div className="flex flex-wrap gap-3">
             {countries.map((country) => (
@@ -69,7 +69,6 @@ export default function Compare() {
           </div>
         </div>
 
-        {/* Comparison */}
         {selectedCountries.length === 0 ? (
           <div className="glass p-12 rounded-xl text-center">
             <p className="text-gray-400">Selecione pelo menos um país para comparar</p>
@@ -115,11 +114,25 @@ export default function Compare() {
                     </td>
                   ))}
                 </tr>
-                <tr>
+                <tr className="border-b border-surface-secondary">
                   <td className="p-4 text-gray-400">Capital</td>
                   {selectedCountries.map((c) => (
                     <td key={c.id} className="p-4 text-center text-white">{c.capital}</td>
                   ))}
+                </tr>
+                <tr>
+                  <td className="p-4 text-gray-400">Custo mensal (est.)</td>
+                  {selectedCountries.map((c) => {
+                    const cost = c.costOfLiving || c.cost_of_living?.[0];
+                    const total = cost
+                      ? Number(cost.rent) + Number(cost.food) + Number(cost.transport) + Number(cost.utilities)
+                      : null;
+                    return (
+                      <td key={c.id} className="p-4 text-center text-accent font-medium">
+                        {total ? `${total.toLocaleString('pt-BR')} ${cost.currency}` : '—'}
+                      </td>
+                    );
+                  })}
                 </tr>
               </tbody>
             </table>

@@ -3,21 +3,67 @@
   <url>
     <loc>https://globalmove.com.br/</loc>
     <priority>1.0</priority>
+    <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://globalmove.com.br/destinos</loc>
     <priority>0.9</priority>
+    <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://globalmove.com.br/comparar</loc>
     <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://globalmove.com.br/simulador</loc>
     <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://globalmove.com.br/onboarding</loc>
     <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://globalmove.com.br/blog</loc>
+    <priority>0.9</priority>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://globalmove.com.br/ai</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://globalmove.com.br/blog/como-morar-na-polonia-2026</loc>
+    <priority>0.7</priority>
+    <lastmod>2026-08-10</lastmod>
+  </url>
+  <url>
+    <loc>https://globalmove.com.br/blog/visto-d7-portugal-guia</loc>
+    <priority>0.7</priority>
+    <lastmod>2026-08-08</lastmod>
+  </url>
+  <url>
+    <loc>https://globalmove.com.br/blog/custo-de-vida-europa-2026</loc>
+    <priority>0.7</priority>
+    <lastmod>2026-08-05</lastmod>
+  </url>
+  <url>
+    <loc>https://globalmove.com.br/blog/trabalhar-na-irlanda-ti</loc>
+    <priority>0.7</priority>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://globalmove.com.br/blog/planejamento-financeiro-imigracao</loc>
+    <priority>0.7</priority>
+    <lastmod>2026-07-28</lastmod>
+  </url>
+  <url>
+    <loc>https://globalmove.com.br/blog/nomade-digital-espanha</loc>
+    <priority>0.7</priority>
+    <lastmod>2026-07-25</lastmod>
   </url>
 </urlset>

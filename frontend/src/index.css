@@ -1,25 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @layer base {
   * {
-    @apply border-surface-secondary;
+    border-color: #122238;
   }
-  
+
   body {
-    @apply bg-background text-white font-sans antialiased;
+    background-color: #07111F;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 @layer components {
   .glass {
-    @apply bg-surface/50 backdrop-blur-lg border border-surface-secondary;
+    background-color: rgba(13, 26, 43, 0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid #122238;
   }
-  
+
   .glass-strong {
-    @apply bg-surface/80 backdrop-blur-xl border border-surface-secondary;
+    background-color: rgba(13, 26, 43, 0.8);
+    backdrop-filter: blur(24px);
+    border: 1px solid #122238;
   }
 }

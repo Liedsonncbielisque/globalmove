@@ -6,6 +6,9 @@ import rateLimit from 'express-rate-limit';
 import { config } from './config/env';
 import { logger } from './utils/logger';
 import { testSupabaseConnection } from './config/supabase';
+import { cacheService } from './services/cache.service';
+import routes from './routes';
+import { errorHandler } from './middleware/error.middleware';
 
 const app = express();
 
@@ -46,30 +49,26 @@ app.get('/health', async (req, res) => {
   }
 });
 
-app.get('/api', (req, res) => {
-  res.json({
-    message: 'GlobalMove API',
-    version: '1.0.0',
-    endpoints: {
-      auth: '/api/auth',
-      countries: '/api/countries',
-      financial: '/api/financial',
-      visas: '/api/visas',
-      users: '/api/users',
-    },
-  });
+app.use('/api', routes);
+
+app.use((req, res) => {
+  res.status(404).json({ status: 'error', message: 'Route not found' });
 });
 
-const server = app.listen(config.port, () => {
+app.use(errorHandler);
+
+const server = app.listen(config.port, async () => {
   logger.info(`🚀 Server running on port ${config.port}`);
   logger.info(`📝 Environment: ${config.env}`);
   logger.info(`🌐 Frontend URL: ${config.frontend.url}`);
+  await cacheService.connect();
 });
 
 process.on('SIGTERM', () => {
-  logger.info('SIGTERM signal received: closing HTTP server');
+  logger.info('SIGTERM received: closing HTTP server');
   server.close(() => {
     logger.info('HTTP server closed');
+    process.exit(0);
   });
 });
 

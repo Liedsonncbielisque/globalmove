@@ -10,6 +10,9 @@ import Simulator from './pages/Simulator';
 import Goals from './pages/Goals';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import AIAssistant from './pages/AIAssistant';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -24,6 +27,9 @@ function App() {
         <Route path="comparar" element={<Compare />} />
         <Route path="simulador" element={<Simulator />} />
         <Route path="metas" element={<Goals />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="blog/:slug" element={<BlogPost />} />
+        <Route path="ai" element={<AIAssistant />} />
         <Route path="login" element={<Login />} />
         <Route path="registro" element={<Register />} />
         <Route path="*" element={<NotFound />} />

@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/globalmove/', // Nome do repositório
+  base: '/', // Vercel serve na raiz
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

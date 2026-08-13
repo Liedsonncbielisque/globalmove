@@ -1,11 +1,9 @@
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { AdInArticle } from '@/components/ads/AdInArticle';
 
 export default function BlogPost() {
-  const { slug } = useParams();
-
-  // Em produção, buscar do backend
+  // Em produção, buscar do backend usando useParams
   const post = {
     title: 'Como Morar na Polônia em 2026: Guia Completo',
     date: '2026-08-10',

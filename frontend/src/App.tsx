@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { MainLayout } from './components/layout/MainLayout';
 import Home from './pages/Home';
 import Onboarding from './pages/Onboarding';
+import Result from './pages/Result';
 import Dashboard from './pages/Dashboard';
 import Countries from './pages/Countries';
 import CountryDetail from './pages/CountryDetail';
@@ -13,10 +14,6 @@ import Register from './pages/Register';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AIAssistant from './pages/AIAssistant';
-import Privacidade from './pages/Privacidade';
-import Termos from './pages/Termos';
-import Sobre from './pages/Sobre';
-import Contato from './pages/Contato';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -25,6 +22,8 @@ function App() {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="onboarding" element={<Onboarding />} />
+        <Route path="analisar" element={<Onboarding />} />
+        <Route path="resultado" element={<Result />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="destinos" element={<Countries />} />
         <Route path="destinos/:countryId" element={<CountryDetail />} />
@@ -36,10 +35,6 @@ function App() {
         <Route path="ai" element={<AIAssistant />} />
         <Route path="login" element={<Login />} />
         <Route path="registro" element={<Register />} />
-        <Route path="privacidade" element={<Privacidade />} />
-        <Route path="termos" element={<Termos />} />
-        <Route path="sobre" element={<Sobre />} />
-        <Route path="contato" element={<Contato />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

@@ -13,6 +13,10 @@ import Register from './pages/Register';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AIAssistant from './pages/AIAssistant';
+import Privacidade from './pages/Privacidade';
+import Termos from './pages/Termos';
+import Sobre from './pages/Sobre';
+import Contato from './pages/Contato';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -32,6 +36,10 @@ function App() {
         <Route path="ai" element={<AIAssistant />} />
         <Route path="login" element={<Login />} />
         <Route path="registro" element={<Register />} />
+        <Route path="privacidade" element={<Privacidade />} />
+        <Route path="termos" element={<Termos />} />
+        <Route path="sobre" element={<Sobre />} />
+        <Route path="contato" element={<Contato />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
